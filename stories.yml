@@ -1,0 +1,16 @@
+version: "2.0"
+stories:
+- story: greet path
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- story: thanks path
+  steps:
+  - intent: thanks
+  - action: utter_thanks
+
+- story: help path
+  steps:
+  - intent: help
+  - action: utter_help
