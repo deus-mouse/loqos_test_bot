@@ -1,0 +1,30 @@
+version: "2.0"
+intents:
+  - greet
+  - thanks
+  - help
+
+responses:
+  utter_greet:
+  - text: "Привет 👋"
+  - text: "Здравствуй 👋"
+  - text: "Hello 👋"
+
+  utter_thanks:
+  - text: "Пожалуйста! 🍀"
+  - text: "Обращайтесь! 🍀"
+  - text: "You are welcome! 🍀"
+  - text: "Get in touch! 🍀"
+
+  utter_help:
+  - text: "Я могу предоставить тебе полезную информацию для жизни на Кипре! ☀️ 
+  Выбери один из разделов, чтобы начать или напиши свой вопрос:"
+  - text: "I can provide you with useful information for life in Cyprus! ☀️ 
+  Choose one of the sections to get started or write your own question:"
+
+
+
+
+
+
+
