@@ -1,0 +1,30 @@
+version: "2.0"
+nlu:
+- intent: greet
+  examples: |
+    - привет
+    - здравствуй
+    - здравствуйте
+    - доброе утро
+    - hello
+    - hi
+    - hey
+    - good morning
+
+- intent: thanks
+  examples: |
+    - спасибо
+    - благодарю
+    - нет, спасибо
+    - нет это все
+    - нет все спасибо
+    - нет вопросов
+    - thanks
+    - thx
+    - no questions
+
+- intent: help
+  examples: |
+    - что ты умеешь
+    - what can you do
+    - help
