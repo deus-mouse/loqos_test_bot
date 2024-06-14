@@ -1,4 +1,4 @@
-from random import randint
+from telegram import KeyboardButton
 
 phrazes = {'start':
                'Привет! Здесь ты можешь найти подборку важной информации для комфортного начала жизни на Кипре!',
@@ -7,10 +7,8 @@ phrazes = {'start':
                            'Выбери одну из кнопок или задай свой вопрос.'],
            }
 
-
-
-# g = phrazes.get('start_tails')[randint(0, len(phrazes.get('start_tails')-1))]
-g = phrazes.get('start_tails')
-r = randint(0, len(phrazes.get('start_tails'))-1)
-print(g)
-print(r)
+buttons = [
+    [KeyboardButton("Документы")],
+    [KeyboardButton("Set up your company")],
+    [KeyboardButton("Taxation")]
+]

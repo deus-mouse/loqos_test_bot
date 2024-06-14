@@ -4,7 +4,7 @@ stories:
 - story: greet path
   steps:
   - intent: greet
-  - action: utter_greet
+  - action: action_handle_greet
 
 - story: thanks path
   steps:
