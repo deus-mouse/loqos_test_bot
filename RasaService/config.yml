@@ -20,9 +20,14 @@ pipeline:
   ambiguity_threshold: 0.1
 
 policies:
-- name: MemoizationPolicy
-- name: RulePolicy
-- name: TEDPolicy
-  max_history: 5
-  epochs: 100
+  - name: MemoizationPolicy
+  - name: TEDPolicy
+  - name: RulePolicy
+    core_fallback_threshold: 0.4
+    core_fallback_action_name: "action_default_fallback"
+    enable_fallback_prediction: True
+    nlu_threshold: 0.3
+    max_history: 5
+    epochs: 100
+
 assistant_id: 20240614-174011-other-baseline

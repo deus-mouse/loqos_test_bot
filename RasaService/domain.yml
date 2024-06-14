@@ -4,6 +4,10 @@ intents:
   - greet
   - thanks
   - help
+  - nlu_fallback
+
+actions:
+  - action_default_fallback
 
 responses:
   utter_greet:
@@ -22,6 +26,10 @@ responses:
   Выбери один из разделов, чтобы начать или напиши свой вопрос:"
 #  - text: "I can provide you with useful information for life in Cyprus! ☀️
 #  Choose one of the sections to get started or write your own question:"
+
+  utter_default:
+  - text: "Извините, я вас не понял. Могли бы вы переформулировать?"
+
 
 
 session_config:
