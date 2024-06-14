@@ -28,9 +28,8 @@ responses:
 #  Choose one of the sections to get started or write your own question:"
 
   utter_default:
-  - text: "Извините, я вас не понял. Могли бы вы переформулировать?"
-
-
+  - text: "К сожалению, не получилось распознать твой запрос. Попробуй сформулировать по другому"
+  - text: "Не совсем поняли твой запрос. Напиши его по-другому, пожалуйста."
 
 session_config:
   session_expiration_time: 60

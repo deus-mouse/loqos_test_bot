@@ -2,6 +2,8 @@ import logging
 from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, CallbackContext, MessageHandler, filters
 import aiohttp
+from instances import phrazes
+from random import randint
 
 TELEGRAM_TOKEN = '7317734081:AAE64GtnGTvz54ZbI60qRQO0xGdmc37tKl8'
 
@@ -28,7 +30,8 @@ async def get_rasa_response(message: str) -> str:
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(chat_id=update.effective_chat.id, text="I'm a bot, please talk to me!")
+    await context.bot.send_message(chat_id=update.effective_chat.id, text=phrazes.get('start'))
+    await context.bot.send_message(chat_id=update.effective_chat.id, text=phrazes.get('start_tails')[randint(0, len(phrazes.get('start_tails'))-1)])
 
 
 # Функция для обработки сообщений
