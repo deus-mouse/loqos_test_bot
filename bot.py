@@ -1,61 +1,48 @@
 import logging
-from telegram import Update, ForceReply
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
-import requests
+from telegram import Update
+from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, CallbackContext, MessageHandler, filters
+import aiohttp
 
-# Вставьте ваш токен сюда
-TELEGRAM_TOKEN = 'YOUR_TELEGRAM_BOT_TOKEN'
+TELEGRAM_TOKEN = '7317734081:AAE64GtnGTvz54ZbI60qRQO0xGdmc37tKl8'
 
-# Логирование
+
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
-logger = logging.getLogger(__name__)
 
-# Функция для команды /start
-def start(update: Update, _: CallbackContext) -> None:
-    user = update.effective_user
-    update.message.reply_markdown_v2(
-        fr'Hi {user.mention_markdown_v2()}\!',
-        reply_markup=ForceReply(selective=True),
-    )
 
-# Функция для обработки сообщений
-def handle_message(update: Update, _: CallbackContext) -> None:
-    user_message = update.message.text
-    rasa_response = get_rasa_response(user_message)
-    update.message.reply_text(rasa_response)
-
-# Функция для получения ответа от Rasa
-def get_rasa_response(message: str) -> str:
+async def get_rasa_response(message: str) -> str:
     rasa_url = "http://localhost:5005/webhooks/rest/webhook"
     payload = {
         "sender": "telegram_user",
         "message": message
     }
-    response = requests.post(rasa_url, json=payload)
-    response_data = response.json()
-    if response_data:
-        return response_data[0].get("text", "Sorry, I didn't understand that.")
-    return "Sorry, I didn't understand that."
+    async with aiohttp.ClientSession() as session:
+        async with session.post(rasa_url, json=payload) as response:
+            response_data = await response.json()
+            print(f'{response_data=}')
+            if response_data:
+                return response_data[0].get("text", "Извините, я вас не понял.")
+    return "Извините, я вас не понял."
 
-def main() -> None:
-    # Создаем Updater и передаем ему токен бота.
-    updater = Updater(TELEGRAM_TOKEN)
 
-    # Получаем диспетчер для регистрации обработчиков
-    dispatcher = updater.dispatcher
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="I'm a bot, please talk to me!")
 
-    # Регистрируем обработчики команд
-    dispatcher.add_handler(CommandHandler("start", start))
 
-    # Регистрируем обработчики сообщений
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_message))
+# Функция для обработки сообщений
+async def handle_message(update: Update, context: CallbackContext) -> None:
+    user_message = update.message.text
+    rasa_response = await get_rasa_response(user_message)
+    await update.message.reply_text(rasa_response)
 
-    # Запускаем бота
-    updater.start_polling()
-    updater.idle()
 
 if __name__ == '__main__':
-    main()
+    application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
+
+    start_handler = CommandHandler('start', start)
+    application.add_handler(start_handler)
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+
+    application.run_polling()
