@@ -6,9 +6,6 @@ intents:
   - help
   - nlu_fallback
 
-actions:
-  - action_default_fallback
-
 responses:
   utter_greet:
   - text: "Привет 👋"
@@ -30,6 +27,10 @@ responses:
   utter_default:
   - text: "К сожалению, не получилось распознать твой запрос. Попробуй сформулировать по другому"
   - text: "Не совсем поняли твой запрос. Напиши его по-другому, пожалуйста."
+
+actions:
+  - action_default_fallback
+
 
 session_config:
   session_expiration_time: 60
