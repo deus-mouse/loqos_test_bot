@@ -40,12 +40,11 @@ class ActionHandleThanks(Action):
         if conversation_block == "documents":
             dispatcher.utter_message(response="utter_thanks_from_docs")
             dispatcher.utter_message(response="utter_suggesting_buttons", buttons=buttons_main_json)
-
         else:
             dispatcher.utter_message(response="utter_thanks")
             dispatcher.utter_message(response="utter_thanks_tail")
             dispatcher.utter_message(response="utter_suggesting_buttons", buttons=buttons_main_json)
-        return []
+        return [SlotSet("conversation_block", "thanks")]
 
 
 class ActionHandleHelp(Action):
