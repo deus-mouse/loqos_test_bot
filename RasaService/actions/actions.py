@@ -14,7 +14,7 @@ from rasa_sdk.executor import CollectingDispatcher
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-from instances import phrazes, buttons_main_json, buttons_docs_json
+from instances import phrazes, buttons_main_json, buttons_docs_json, buttons_taxation, buttons_setup_company
 from helpers import get_random_object
 from rasa_sdk.events import SlotSet
 
@@ -131,20 +131,15 @@ class ActionHandleSetupCompany(Action):
         return "action_handle_setup_company"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
+
         # buttons = [
-        #     {"title": "Типы компаний", "payload": "/main_types_of_companies"},
-        #     {"title": "Зарегистрировать компанию", "payload": "/how_to_register_a_company_in_cyprus"},
-        #     {"title": "Обязательства и платежи", "payload": "/obligations_and_payments"},
-        #     {"title": "Другой вопрос", "payload": "/another_question"},
+        #     {"title": "Типы компаний", },
+        #     {"title": "Зарегистрировать компанию", },
+        #     {"title": "Обязательства и платежи", },
+        #     {"title": "Другой вопрос", },
         # ]
-        buttons = [
-            {"title": "Типы компаний", },
-            {"title": "Зарегистрировать компанию", },
-            {"title": "Обязательства и платежи", },
-            {"title": "Другой вопрос", },
-        ]
-        dispatcher.utter_message(response="utter_setup_company", buttons=buttons)
-        return []
+        dispatcher.utter_message(response="utter_setup_company", buttons=buttons_setup_company)
+        return [SlotSet("conversation_block", "setup_company")]
 
 
 class ActionHandleTaxation(Action):
@@ -152,13 +147,8 @@ class ActionHandleTaxation(Action):
         return "action_handle_taxation"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
-        buttons = [
-            {"title": "Стать налоговым резидентом Кипра", "payload": "/how_to become_a_tax_resident_in_cyprus"},
-            {"title": "Калькулятор налогообложения", "payload": "/tax_calculator"},
-            {"title": "Индивидуальное налогообложение", "payload": "/individual_taxation"},
-            {"title": "Другой вопрос", "payload": "/another question"},
-        ]
-        dispatcher.utter_message(response="utter_taxation", buttons=buttons)
+
+        dispatcher.utter_message(response="utter_taxation", buttons=buttons_taxation)
         return []
 
 
