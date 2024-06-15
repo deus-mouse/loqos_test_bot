@@ -31,4 +31,28 @@ stories:
   - intent: setup_company
   - action: action_handle_setup_company
 
+- story: visas_for_entry path
+  steps:
+  - intent: visas_for_entry
+  - action: action_handle_visas_for_entry
+
+- story: police_clearance_certificate path
+  steps:
+  - intent: police_clearance_certificate
+  - action: action_handle_police_clearance_certificate
+
+- story: translation_of_documents path
+  steps:
+  - intent: translation_of_documents
+  - action: action_handle_translation_of_documents
+
+- story: another_question path
+  steps:
+  - intent: another_question
+  - action: action_handle_another_question
+
+- story: go_back path
+  steps:
+  - intent: go_back
+  - action: action_handle_documents
 

@@ -59,7 +59,6 @@ class ActionDefaultFallback(Action):
 
 
 class ActionHandleDocuments(Action):
-
     def name(self) -> Text:
         return "action_handle_documents"
 
@@ -73,3 +72,66 @@ class ActionHandleDocuments(Action):
         dispatcher.utter_message(response="utter_documents")
         dispatcher.utter_message(response="utter_documents_tail", buttons=buttons_docs_json)
         return []
+
+
+class ActionHandleVisasForEntry(Action):
+    def name(self) -> Text:
+        return "action_handle_visas_for_entry"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
+        buttons_docs2_json = [
+    {"title": "Назад", "payload": "/go_back"},
+    {"title": "Спасибо", "payload": "/thanks"},
+]
+        dispatcher.utter_message(response="utter_visas_for_entry", buttons=buttons_docs2_json)
+        return []
+
+
+class ActionHandlePoliceClearanceCertificate(Action):
+    def name(self) -> Text:
+        return "action_handle_police_clearance_certificate"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
+        buttons_docs2_json = [
+    {"title": "Назад", "payload": "/go_back"},
+    {"title": "Спасибо", "payload": "/thanks"},
+]
+        dispatcher.utter_message(response="utter_police_clearance_certificate", buttons=buttons_docs2_json)
+        return []
+
+
+class ActionHandleTranslationOfDocuments(Action):
+    def name(self) -> Text:
+        return "action_handle_translation_of_documents"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
+        buttons_docs2_json = [
+    {"title": "Назад", "payload": "/go_back"},
+    {"title": "Спасибо", "payload": "/thanks"},
+]
+        dispatcher.utter_message(response="utter_translation_of_documents", buttons=buttons_docs2_json)
+        return []
+
+
+class ActionHandleAnotherQuestion(Action):
+    def name(self) -> Text:
+        return "action_handle_another_question"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
+        buttons_docs2_json = [
+    {"title": "Назад", "payload": "/go_back"},
+    {"title": "Спасибо", "payload": "/thanks"},
+]
+        dispatcher.utter_message(response="utter_another_question", buttons=buttons_docs2_json)
+        return []
+
+
+
+
+
+
+
+
+
+
+

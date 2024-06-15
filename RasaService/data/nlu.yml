@@ -32,9 +32,50 @@ nlu:
 
 - intent: documents
   examples: |
-    - документы
+    - Документы
 
 - intent: setup_company
   examples: |
     - Создайте свою компанию
     - Создать компанию
+
+- intent: visas_for_entry
+  examples: |
+    - Визы для въезда
+    - Виза
+    
+- intent: police_clearance_certificate
+  examples: |
+    - Справка о несудимости
+
+- intent: translation_of_documents
+  examples: |
+    - Перевод документов
+
+- intent: another_question
+  examples: |
+    - Другой вопрос
+    
+- intent: go_back
+  examples: |
+    - Назад
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

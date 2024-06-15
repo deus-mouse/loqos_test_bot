@@ -56,11 +56,23 @@ async def handle_message(update: Update, context: CallbackContext) -> None:
         await update.message.reply_text(response, reply_markup=keyboard)
 
 
-async def handle_callback_query(update: Update, context: CallbackContext) -> None:
-    query = update.callback_query
-    await query.answer()
-    user_message = query.data
-    print(f'{user_message=}')
+# # Функция для обработки нажатий на кнопки
+# async def handle_callback_query(update: Update, context: CallbackContext) -> None:
+#     query = update.callback_query
+#     await query.answer()
+#     print(f'{query=}')
+#     response_text = ""
+#     if query.data == 'documents':
+#         response_text = "You selected: Документы"
+#     elif query.data == 'setup_company':
+#         response_text = "You selected: Set up your company"
+#     elif query.data == 'taxation':
+#         response_text = "You selected: Taxation"
+#     else:
+#         response_text = "Unknown option selected"
+#
+#     await query.message.reply_text(response_text)
+
 
 
 if __name__ == '__main__':
@@ -68,10 +80,8 @@ if __name__ == '__main__':
 
     start_handler = CommandHandler('start', start)
     message_handler = MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message)
-    callback_query_handler = CallbackQueryHandler(handle_callback_query)
 
     application.add_handler(start_handler)
     application.add_handler(message_handler)
-    application.add_handler(callback_query_handler)
 
     application.run_polling()

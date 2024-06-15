@@ -31,6 +31,31 @@ rules:
       - intent: setup_company
       - action: action_handle_setup_company
 
+  - rule: Visas_for_entry Rule
+    steps:
+      - intent: visas_for_entry
+      - action: action_handle_visas_for_entry
+
+  - rule: Police_clearance_certificate Rule
+    steps:
+      - intent: police_clearance_certificate
+      - action: action_handle_police_clearance_certificate
+
+  - rule: Translation_of_documents Rule
+    steps:
+      - intent: translation_of_documents
+      - action: action_handle_translation_of_documents
+
+  - rule: Another_question Rule
+    steps:
+      - intent: another_question
+      - action: action_handle_another_question
+
+  - rule: Go_back Rule
+    steps:
+      - intent: go_back
+      - action: action_handle_documents
+
 
 
 
