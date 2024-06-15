@@ -126,8 +126,40 @@ class ActionHandleAnotherQuestion(Action):
         return []
 
 
+class ActionHandleSetupCompany(Action):
+    def name(self) -> Text:
+        return "action_handle_setup_company"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
+        # buttons = [
+        #     {"title": "Типы компаний", "payload": "/main_types_of_companies"},
+        #     {"title": "Зарегистрировать компанию", "payload": "/how_to_register_a_company_in_cyprus"},
+        #     {"title": "Обязательства и платежи", "payload": "/obligations_and_payments"},
+        #     {"title": "Другой вопрос", "payload": "/another_question"},
+        # ]
+        buttons = [
+            {"title": "Типы компаний", },
+            {"title": "Зарегистрировать компанию", },
+            {"title": "Обязательства и платежи", },
+            {"title": "Другой вопрос", },
+        ]
+        dispatcher.utter_message(response="utter_setup_company", buttons=buttons)
+        return []
 
 
+class ActionHandleTaxation(Action):
+    def name(self) -> Text:
+        return "action_handle_taxation"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
+        buttons = [
+            {"title": "Стать налоговым резидентом Кипра", "payload": "/how_to become_a_tax_resident_in_cyprus"},
+            {"title": "Калькулятор налогообложения", "payload": "/tax_calculator"},
+            {"title": "Индивидуальное налогообложение", "payload": "/individual_taxation"},
+            {"title": "Другой вопрос", "payload": "/another question"},
+        ]
+        dispatcher.utter_message(response="utter_taxation", buttons=buttons)
+        return []
 
 
 

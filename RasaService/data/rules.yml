@@ -26,11 +26,6 @@ rules:
       - intent: documents
       - action: action_handle_documents
 
-  - rule: Setup_company Rule
-    steps:
-      - intent: setup_company
-      - action: action_handle_setup_company
-
   - rule: Visas_for_entry Rule
     steps:
       - intent: visas_for_entry
@@ -56,7 +51,15 @@ rules:
       - intent: go_back
       - action: action_handle_documents
 
+  - rule: Setup_company Rule
+    steps:
+      - intent: setup_company
+      - action: action_handle_setup_company
 
+  - rule: Taxation Rule
+    steps:
+      - intent: taxation
+      - action: action_handle_taxation
 
 
 

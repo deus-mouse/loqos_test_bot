@@ -36,11 +36,6 @@ nlu:
     - Документы
     - Бумаги
 
-- intent: setup_company
-  examples: |
-    - Создайте свою компанию
-    - Создать компанию
-
 - intent: visas_for_entry
   examples: |
     - Визы для въезда
@@ -65,11 +60,16 @@ nlu:
   examples: |
     - Назад
     - Вернуться
-    
 
+- intent: setup_company
+  examples: |
+    - Создайте свою компанию
+    - Зарегистрировать компанию
     
-    
-    
+- intent: taxation
+  examples: |
+    - Налогообложение
+    - Обязательства    
     
     
     

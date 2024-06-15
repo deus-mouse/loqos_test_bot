@@ -53,10 +53,6 @@ responses:
     - text: "Чтобы прочитать информацию, нажми на одну из кнопок:"
     - text: "Выбери кнопку и узнай подробности:"
 
-  utter_setup_company:
-    - text: "Здесь вы можете найти базовую информацию о том, как открыть свой бизнес на Кипре."
-
-
   utter_visas_for_entry:
     - text: "Для граждан стран Евросоюза и владельцев ВНЖ этих стран не нужна виза для въезда на Кипр. Граждане третьих стран могут въехать на Кипр по Шенгенской визе или оформив национальную визу Кипра. Чтобы найти полную информацию по визам и правилам пребывания на Кипре, вы можете перейти на сайт Миграционного департамента: http://www.moi.gov.cy/moi/crmd/crmd.nsf/home_en/home_en?openform#"
 
@@ -72,6 +68,11 @@ responses:
   utter_another_question:
     - text: "Что вы хотите узнать?"
 
+  utter_setup_company:
+    - text: "Здесь вы можете найти базовую информацию о том, как открыть свой бизнес на Кипре."
+
+  utter_taxation:
+    - text: "Понимание того, как работает налогообложение очень важно при переезде в другую страну. Мы собрали общую информацию, которая поможет начать разбираться в вопросе."
 
 slots:
   conversation_block:
@@ -97,11 +98,12 @@ actions:
   - action_handle_help
   - action_default_fallback
   - action_handle_documents
-  - action_handle_setup_company
   - action_handle_visas_for_entry
   - action_handle_police_clearance_certificate
   - action_handle_translation_of_documents
   - action_handle_another_question
+  - action_handle_setup_company
+  - action_handle_taxation
 
 
 session_config:

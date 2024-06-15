@@ -28,11 +28,6 @@ stories:
   - intent: documents
   - action: action_handle_documents
 
-- story: setup_company path
-  steps:
-  - intent: setup_company
-  - action: action_handle_setup_company
-
 - story: visas_for_entry path
   steps:
   - intent: visas_for_entry
@@ -58,3 +53,12 @@ stories:
   - intent: go_back
   - action: action_handle_documents
 
+- story: setup_company path
+  steps:
+  - intent: setup_company
+  - action: action_handle_setup_company
+
+- story: taxation path
+  steps:
+  - intent: taxation
+  - action: action_handle_taxation
