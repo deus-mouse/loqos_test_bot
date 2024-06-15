@@ -14,8 +14,9 @@ from rasa_sdk.executor import CollectingDispatcher
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-from instances import phrazes, buttons_main_json
+from instances import phrazes, buttons_main_json, buttons_docs_json
 from helpers import get_random_object
+from rasa_sdk.events import SlotSet
 
 
 class ActionHandleGreet(Action):
@@ -34,9 +35,16 @@ class ActionHandleThanks(Action):
         return "action_handle_thanks"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
-        dispatcher.utter_message(response="utter_thanks")
-        dispatcher.utter_message(response="utter_thanks_tail")
-        dispatcher.utter_message(response="utter_suggesting_buttons", buttons=buttons_main_json)
+        conversation_block = tracker.get_slot("conversation_block")
+        print(f'{conversation_block=}')
+        if conversation_block == "documents":
+            dispatcher.utter_message(response="utter_thanks_from_docs")
+            dispatcher.utter_message(response="utter_suggesting_buttons", buttons=buttons_main_json)
+
+        else:
+            dispatcher.utter_message(response="utter_thanks")
+            dispatcher.utter_message(response="utter_thanks_tail")
+            dispatcher.utter_message(response="utter_suggesting_buttons", buttons=buttons_main_json)
         return []
 
 
@@ -63,12 +71,6 @@ class ActionHandleDocuments(Action):
         return "action_handle_documents"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
-        buttons_docs_json = [
-    {"title": "Визы для въезда", "payload": "/visas_for_entry"},
-    {"title": "Справка о несудимости", "payload": "/police_clearance_certificate"},
-    {"title": "Перевод документов", "payload": "/translation_of_documents"},
-    {"title": "Другой вопрос", "payload": "/another_question"},
-]
         dispatcher.utter_message(response="utter_documents")
         dispatcher.utter_message(response="utter_documents_tail", buttons=buttons_docs_json)
         return []
@@ -84,7 +86,7 @@ class ActionHandleVisasForEntry(Action):
     {"title": "Спасибо", "payload": "/thanks"},
 ]
         dispatcher.utter_message(response="utter_visas_for_entry", buttons=buttons_docs2_json)
-        return []
+        return [SlotSet("conversation_block", "documents")]
 
 
 class ActionHandlePoliceClearanceCertificate(Action):
@@ -97,7 +99,7 @@ class ActionHandlePoliceClearanceCertificate(Action):
     {"title": "Спасибо", "payload": "/thanks"},
 ]
         dispatcher.utter_message(response="utter_police_clearance_certificate", buttons=buttons_docs2_json)
-        return []
+        return [SlotSet("conversation_block", "documents")]
 
 
 class ActionHandleTranslationOfDocuments(Action):
@@ -110,7 +112,7 @@ class ActionHandleTranslationOfDocuments(Action):
     {"title": "Спасибо", "payload": "/thanks"},
 ]
         dispatcher.utter_message(response="utter_translation_of_documents", buttons=buttons_docs2_json)
-        return []
+        return [SlotSet("conversation_block", "documents")]
 
 
 class ActionHandleAnotherQuestion(Action):
@@ -118,12 +120,12 @@ class ActionHandleAnotherQuestion(Action):
         return "action_handle_another_question"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
-        buttons_docs2_json = [
-    {"title": "Назад", "payload": "/go_back"},
-    {"title": "Спасибо", "payload": "/thanks"},
-]
-        dispatcher.utter_message(response="utter_another_question", buttons=buttons_docs2_json)
+
+        dispatcher.utter_message(response="utter_another_question")
+        dispatcher.utter_message(response="utter_suggesting_buttons", buttons=buttons_main_json)
+
         return []
+
 
 
 

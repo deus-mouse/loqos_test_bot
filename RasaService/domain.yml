@@ -19,6 +19,11 @@ responses:
 #  - text: "You are welcome! 🍀"
 #  - text: "Get in touch! 🍀"
 
+  utter_thanks_from_docs:
+  - text: "Хочешь узнать что-нибудь еще?"
+  - text: "Интересно узнать что-нибудь еще?"
+  - text: "Остались еще вопросы?"
+
   utter_thanks_tail:
   - text: "Я всегда здесь, если захочешь узнать что нибудь еще. 🙌🏼"
   - text: "Я тут, если хочешь прочитать другую информацию. 👍🏼"
@@ -68,6 +73,23 @@ responses:
     - text: "Что вы хотите узнать?"
 
 
+slots:
+  conversation_block:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_intent
+        value: greet
+        intent: greet
+      - type: from_intent
+        value: documents
+        intent: documents
+      - type: from_intent
+        value: setup_company
+        intent: setup_company
+      - type: from_intent
+        value: taxation
+        intent: taxation
 
 actions:
   - action_handle_greet

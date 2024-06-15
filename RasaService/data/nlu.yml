@@ -27,12 +27,14 @@ nlu:
 - intent: help
   examples: |
     - что ты умеешь
+    - что можешь
 #    - what can you do
 #    - help
 
 - intent: documents
   examples: |
     - Документы
+    - Бумаги
 
 - intent: setup_company
   examples: |
@@ -47,18 +49,22 @@ nlu:
 - intent: police_clearance_certificate
   examples: |
     - Справка о несудимости
+    - документ о несудимости
 
 - intent: translation_of_documents
   examples: |
     - Перевод документов
+    - Перевод бумаг
 
 - intent: another_question
   examples: |
     - Другой вопрос
-    
+    - еще вопрос
+
 - intent: go_back
   examples: |
     - Назад
+    - Вернуться
     
 
     

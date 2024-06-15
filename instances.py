@@ -18,3 +18,10 @@ buttons_main_json = [
     {"title": "Создайте свою компанию", "payload": "/setup_company"},
     {"title": "Налогообложение", "payload": "/taxation"}
 ]
+
+buttons_docs_json = [
+    {"title": "Визы для въезда", "payload": "/visas_for_entry"},
+    {"title": "Справка о несудимости", "payload": "/police_clearance_certificate"},
+    {"title": "Перевод документов", "payload": "/translation_of_documents"},
+    {"title": "Другой вопрос", "payload": "/another_question"},
+]
