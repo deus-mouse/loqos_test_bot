@@ -1,9 +1,14 @@
 import logging
-from telegram import Update, ReplyKeyboardMarkup
+from typing import Tuple, Union, List, Optional
+
+from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, CallbackContext, MessageHandler, filters
 import aiohttp
 from instances import phrazes, buttons
 from random import randint
+from itertools import zip_longest
+from helpers import get_keyboard_from_json
+
 
 TELEGRAM_TOKEN = '7317734081:AAE64GtnGTvz54ZbI60qRQO0xGdmc37tKl8'
 
@@ -14,7 +19,7 @@ logging.basicConfig(
 )
 
 
-async def get_rasa_response(message: str) -> str:
+async def get_rasa_response(message: str) -> Tuple[Union[list, List[str]], Optional[list]]:
     rasa_url = "http://localhost:5005/webhooks/rest/webhook"
     payload = {
         "sender": "telegram_user",
@@ -24,12 +29,10 @@ async def get_rasa_response(message: str) -> str:
         async with session.post(rasa_url, json=payload) as response:
             response_data = await response.json(encoding='utf-8')
             print(f'{response_data=}')
-            result = [resp.get("text") for resp in response_data] if response_data else ["Извините, я вас не понял."]
-
-            print(f'{result=}')
-
-            return result
-
+            text = [resp.get("text") for resp in response_data] if response_data else ["Извините, я вас не понял."]
+            buttons = [resp.get("buttons") for resp in response_data] if response_data else None
+            combined_responses = list(zip_longest(*[text, buttons], fillvalue=None))
+            return combined_responses
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -44,8 +47,13 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def handle_message(update: Update, context: CallbackContext) -> None:
     user_message = update.message.text
     rasa_responses = await get_rasa_response(user_message)
-    for response in rasa_responses:
-        await update.message.reply_text(response)
+    for response, buttons in rasa_responses:
+        keyboard = None
+        if buttons:
+            buttons = get_keyboard_from_json(buttons)
+            keyboard = ReplyKeyboardMarkup(buttons, resize_keyboard=True, one_time_keyboard=True)
+
+        await update.message.reply_text(response, reply_markup=keyboard)
 
 
 if __name__ == '__main__':

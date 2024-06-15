@@ -35,7 +35,8 @@ from rasa_sdk.executor import CollectingDispatcher
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-from instances import buttons
+# from instances import buttons
+
 
 class ActionHandleGreet(Action):
 
