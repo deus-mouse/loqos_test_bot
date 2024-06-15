@@ -6,6 +6,11 @@ rules:
       - intent: greet
       - action: action_handle_greet
 
+  - rule: Thaks user
+    steps:
+      - intent: thanks
+      - action: action_handle_thanks
+
   - rule: Fallback Rule
     steps:
       - intent: nlu_fallback

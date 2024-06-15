@@ -54,7 +54,25 @@ class ActionHandleGreet(Action):
         # dispatcher.utter_message(text=get_random_object(phrazes.get('start_tails')), buttons=buttons)
         dispatcher.utter_message(response="utter_suggesting_buttons", buttons=buttons)
         return []
-#
+
+
+class ActionHandleThanks(Action):
+
+    def name(self) -> Text:
+        return "action_handle_thanks"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
+        buttons = [
+            {"title": "Документы", "payload": "/documents"},
+            {"title": "Set up your company", "payload": "/setup_company"},
+            {"title": "Taxation", "payload": "/taxation"}
+        ]
+        dispatcher.utter_message(response="utter_thanks")
+        dispatcher.utter_message(response="utter_thanks_tail")
+        dispatcher.utter_message(response="utter_suggesting_buttons", buttons=buttons)
+        return []
+
+
 # class ActionHandleGoodbye(Action):
 #
 #     def name(self) -> Text:

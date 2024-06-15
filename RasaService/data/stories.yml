@@ -9,7 +9,7 @@ stories:
 - story: thanks path
   steps:
   - intent: thanks
-  - action: utter_thanks
+  - action: action_handle_thanks
 
 - story: help path
   steps:
