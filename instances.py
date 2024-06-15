@@ -9,7 +9,12 @@ phrazes = {'start':
 
 buttons = [
     [KeyboardButton("Документы")],
-    [KeyboardButton("Set up your company")],
-    [KeyboardButton("Taxation")]
+    [KeyboardButton("Создайте свою компанию")],
+    [KeyboardButton("Налогообложение")]
 ]
 
+buttons_main_json = [
+    {"title": "Документы", "payload": "/documents"},
+    {"title": "Создайте свою компанию", "payload": "/setup_company"},
+    {"title": "Налогообложение", "payload": "/taxation"}
+]

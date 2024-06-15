@@ -29,3 +29,12 @@ nlu:
     - что ты умеешь
 #    - what can you do
 #    - help
+
+- intent: documents
+  examples: |
+    - документы
+
+- intent: setup_company
+  examples: |
+    - Создайте свою компанию
+    - Создать компанию

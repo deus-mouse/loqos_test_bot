@@ -20,3 +20,15 @@ stories:
   steps:
   - intent: nlu_fallback
   - action: action_default_fallback
+
+- story: documents path
+  steps:
+  - intent: documents
+  - action: action_handle_documents
+
+- story: setup_company path
+  steps:
+  - intent: setup_company
+  - action: action_handle_setup_company
+
+

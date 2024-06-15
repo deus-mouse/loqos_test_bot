@@ -2,7 +2,7 @@ import logging
 from typing import Tuple, Union, List, Optional
 
 from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, CallbackContext, MessageHandler, filters
+from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, CallbackContext, MessageHandler, filters, CallbackQueryHandler
 import aiohttp
 from instances import phrazes, buttons
 from random import randint
@@ -56,11 +56,22 @@ async def handle_message(update: Update, context: CallbackContext) -> None:
         await update.message.reply_text(response, reply_markup=keyboard)
 
 
+async def handle_callback_query(update: Update, context: CallbackContext) -> None:
+    query = update.callback_query
+    await query.answer()
+    user_message = query.data
+    print(f'{user_message=}')
+
+
 if __name__ == '__main__':
     application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
 
     start_handler = CommandHandler('start', start)
+    message_handler = MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message)
+    callback_query_handler = CallbackQueryHandler(handle_callback_query)
+
     application.add_handler(start_handler)
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    application.add_handler(message_handler)
+    application.add_handler(callback_query_handler)
 
     application.run_polling()
