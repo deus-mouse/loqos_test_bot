@@ -73,44 +73,20 @@ class ActionHandleThanks(Action):
         return []
 
 
-# class ActionHandleGoodbye(Action):
-#
-#     def name(self) -> Text:
-#         return "action_handle_goodbye"
-#
-#     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#         message = tracker.latest_message.get('text', '')
-#         if any(word in message.lower() for word in ['goodbye', 'bye', 'see you', 'catch you later']):
-#             dispatcher.utter_message(response="utter_goodbye")
-#         else:
-#             dispatcher.utter_message(response="utter_goodbye")
-#         return []
-#
-# class ActionHandleMoodGreat(Action):
-#
-#     def name(self) -> Text:
-#         return "action_handle_mood_great"
-#
-#     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#         message = tracker.latest_message.get('text', '')
-#         if any(word in message.lower() for word in ['great', 'well', 'amazing', 'happy']):
-#             dispatcher.utter_message(response="utter_mood_great")
-#         else:
-#             dispatcher.utter_message(response="utter_mood_great")
-#         return []
-#
-# class ActionHandleMoodUnhappy(Action):
-#
-#     def name(self) -> Text:
-#         return "action_handle_mood_unhappy"
-#
-#     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#         message = tracker.latest_message.get('text', '')
-#         if any(word in message.lower() for word in ['sad', 'not feeling well', 'unhappy', 'bad']):
-#             dispatcher.utter_message(response="utter_mood_unhappy")
-#         else:
-#             dispatcher.utter_message(response="utter_mood_unhappy")
-#         return []
+class ActionHandleHelp(Action):
+
+    def name(self) -> Text:
+        return "action_handle_help"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
+        buttons = [
+            {"title": "Документы", "payload": "/documents"},
+            {"title": "Set up your company", "payload": "/setup_company"},
+            {"title": "Taxation", "payload": "/taxation"}
+        ]
+        dispatcher.utter_message(response="utter_help", buttons=buttons)
+        return []
+
 
 class ActionDefaultFallback(Action):
 

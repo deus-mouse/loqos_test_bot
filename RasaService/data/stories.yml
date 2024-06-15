@@ -14,7 +14,7 @@ stories:
 - story: help path
   steps:
   - intent: help
-  - action: utter_help
+  - action: action_handle_help
 
 - story: fallback
   steps:

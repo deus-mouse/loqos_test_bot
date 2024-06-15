@@ -11,6 +11,11 @@ rules:
       - intent: thanks
       - action: action_handle_thanks
 
+  - rule: Help
+    steps:
+      - intent: help
+      - action: action_handle_help
+
   - rule: Fallback Rule
     steps:
       - intent: nlu_fallback
