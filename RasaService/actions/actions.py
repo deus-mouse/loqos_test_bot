@@ -51,7 +51,8 @@ class ActionHandleGreet(Action):
             {"title": "Taxation", "payload": "/taxation"}
         ]
         dispatcher.utter_message(response="utter_greet")
-        dispatcher.utter_message(text=get_random_object(phrazes.get('start_tails')), buttons=buttons)
+        # dispatcher.utter_message(text=get_random_object(phrazes.get('start_tails')), buttons=buttons)
+        dispatcher.utter_message(response="utter_suggesting_buttons", buttons=buttons)
         return []
 #
 # class ActionHandleGoodbye(Action):
