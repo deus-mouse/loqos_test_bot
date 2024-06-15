@@ -8,23 +8,14 @@ def get_keyboard_from_json(data):
 
 
 def get_inline_keyboard_from_json(data):
-    # transformed_buttons = [[InlineKeyboardButton(button["title"])] for button in data]
-    # print(f'{transformed_buttons=}')
-    # return transformed_buttons
     transformed_buttons = []
     for button in data:
-        # Преобразуем title и payload
         title = button["title"]
         payload = button["payload"].lstrip("/")
-
-        # Создаем объект InlineKeyboardButton
         inline_button = InlineKeyboardButton(title, callback_data=payload)
-
-        # Добавляем его в список в нужном формате
         transformed_buttons.append([inline_button])
-
-    print(f'{transformed_buttons=}')
     return transformed_buttons
+
 
 def get_random_object(data):
     return data[randint(0, len(data)-1)]

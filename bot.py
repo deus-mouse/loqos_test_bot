@@ -43,31 +43,34 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                    reply_markup=keyboard)
 
 
-# Функция для обработки сообщений
+async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    help_text = (
+        "Я могу предоставить тебе полезную информацию для жизни на Кипре! ☀️ "
+        "Выбери один из разделов, чтобы начать или напиши свой вопрос:"
+    )
+    keyboard = ReplyKeyboardMarkup(buttons, resize_keyboard=True, one_time_keyboard=True)
+    await update.message.reply_text(help_text, reply_markup=keyboard)
+
+
 async def handle_message(update: Update, context: CallbackContext) -> None:
     user_message = update.message.text
     rasa_responses = await get_rasa_response(user_message)
     for response, buttons in rasa_responses:
         keyboard = None
         if buttons:
-            print(f'------ {buttons=}')
             if find_values_by_titles(buttons, ['Типы компаний', 'Стать налоговым резидентом Кипра']):
                 buttons = get_inline_keyboard_from_json(buttons)
                 keyboard = InlineKeyboardMarkup(buttons)
             else:
                 buttons = get_keyboard_from_json(buttons)
                 keyboard = ReplyKeyboardMarkup(buttons, resize_keyboard=True, one_time_keyboard=True)
-        print(f'{keyboard=}')
         await update.message.reply_text(response, reply_markup=keyboard)
 
 
-# Функция для обработки нажатий на кнопки
 async def handle_callback_query(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     await query.answer()
-    print(f'{query.message.reply_markup.inline_keyboard=}')
     buttons = query.message.reply_markup.inline_keyboard
-    print(f'----- {buttons=}')
     result = get_title_by_payload(buttons, query.data)
     response_text = f"Вы выбрали тему: {result}"
     await query.message.reply_text(response_text)
@@ -78,10 +81,12 @@ if __name__ == '__main__':
     application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
 
     start_handler = CommandHandler('start', start)
+    help_handler = CommandHandler('help', help_command)
     message_handler = MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message)
     callback_query_handler = CallbackQueryHandler(handle_callback_query)
 
     application.add_handler(start_handler)
+    application.add_handler(help_handler)
     application.add_handler(message_handler)
     application.add_handler(callback_query_handler)
 
