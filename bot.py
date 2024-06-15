@@ -7,7 +7,7 @@ import aiohttp
 from instances import phrazes, buttons
 from random import randint
 from itertools import zip_longest
-from helpers import get_keyboard_from_json
+from helpers import get_keyboard_from_json, get_random_object
 
 
 TELEGRAM_TOKEN = '7317734081:AAE64GtnGTvz54ZbI60qRQO0xGdmc37tKl8'
@@ -39,7 +39,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = ReplyKeyboardMarkup(buttons, resize_keyboard=True, one_time_keyboard=True)
     await context.bot.send_message(chat_id=update.effective_chat.id, text=phrazes.get('start'))
     await context.bot.send_message(chat_id=update.effective_chat.id,
-                                   text=phrazes.get('start_tails')[randint(0, len(phrazes.get('start_tails'))-1)],
+                                   text=get_random_object(phrazes.get('start_tails')),
                                    reply_markup=keyboard)
 
 

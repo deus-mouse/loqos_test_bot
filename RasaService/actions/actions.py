@@ -35,7 +35,8 @@ from rasa_sdk.executor import CollectingDispatcher
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-# from instances import buttons
+from instances import phrazes
+from helpers import get_random_object
 
 
 class ActionHandleGreet(Action):
@@ -44,21 +45,13 @@ class ActionHandleGreet(Action):
         return "action_handle_greet"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
-        # keyboard = ReplyKeyboardMarkup(buttons, resize_keyboard=True, one_time_keyboard=True)
-        # buttons = [
-        #     [InlineKeyboardButton("Документы", callback_data='documents')],
-        #     [InlineKeyboardButton("Set up your company", callback_data='setup_company')],
-        #     [InlineKeyboardButton("Taxation", callback_data='taxation')]
-        # ]
-        # keyboard = InlineKeyboardMarkup(buttons)
-
         buttons = [
             {"title": "Документы", "payload": "/documents"},
             {"title": "Set up your company", "payload": "/setup_company"},
             {"title": "Taxation", "payload": "/taxation"}
         ]
         dispatcher.utter_message(response="utter_greet")
-        dispatcher.utter_message(text="Please choose an option:", buttons=buttons)
+        dispatcher.utter_message(text=get_random_object(phrazes.get('start_tails')), buttons=buttons)
         return []
 #
 # class ActionHandleGoodbye(Action):
