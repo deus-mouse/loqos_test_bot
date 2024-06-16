@@ -1,3 +1,68 @@
 #### This file contains tests to evaluate that your bot behaves as expected.
 #### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
 
+
+version: "3.1"
+
+stories:
+- story: Test greet path
+  steps:
+  - intent: greet
+  - action: action_handle_greet
+
+- story: Test thanks path
+  steps:
+  - intent: thanks
+  - action: action_handle_thanks
+  - slot_was_set:
+      - conversation_block: "documents"
+
+- story: Test help path
+  steps:
+  - intent: help
+  - action: action_handle_help
+
+- story: Test fallback
+  steps:
+  - intent: nlu_fallback
+  - action: action_default_fallback
+
+- story: Test documents path
+  steps:
+  - intent: documents
+  - action: action_handle_documents
+
+- story: Test visas_for_entry path
+  steps:
+  - intent: visas_for_entry
+  - action: action_handle_visas_for_entry
+
+- story: Test police_clearance_certificate path
+  steps:
+  - intent: police_clearance_certificate
+  - action: action_handle_police_clearance_certificate
+
+- story: Test translation_of_documents path
+  steps:
+  - intent: translation_of_documents
+  - action: action_handle_translation_of_documents
+
+- story: Test another_question path
+  steps:
+  - intent: another_question
+  - action: action_handle_another_question
+
+- story: Test go_back path
+  steps:
+  - intent: go_back
+  - action: action_handle_documents
+
+- story: Test setup_company path
+  steps:
+  - intent: setup_company
+  - action: action_handle_setup_company
+
+- story: Test taxation path
+  steps:
+  - intent: taxation
+  - action: action_handle_taxation

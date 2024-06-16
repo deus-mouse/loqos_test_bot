@@ -27,7 +27,6 @@ async def get_rasa_response(message: str) -> list:
     async with aiohttp.ClientSession() as session:
         async with session.post(rasa_url, json=payload) as response:
             response_data = await response.json(encoding='utf-8')
-            print(f'{response_data=}')
             text = [resp.get("text") for resp in response_data] if response_data else ["Извините, я вас не понял."]
             buttons = [resp.get("buttons") for resp in response_data] if response_data else None
             combined_responses = list(zip_longest(*[text, buttons], fillvalue=None))
@@ -35,7 +34,7 @@ async def get_rasa_response(message: str) -> list:
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    keyboard = ReplyKeyboardMarkup(buttons, resize_keyboard=True, one_time_keyboard=True)
+    keyboard = ReplyKeyboardMarkup(buttons_main, resize_keyboard=True, one_time_keyboard=True)
     await context.bot.send_message(chat_id=update.effective_chat.id, text=phrazes.get('start'))
     await context.bot.send_message(chat_id=update.effective_chat.id,
                                    text=get_random_object(phrazes.get('start_tails')),
@@ -47,7 +46,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Я могу предоставить тебе полезную информацию для жизни на Кипре! ☀️ "
         "Выбери один из разделов, чтобы начать или напиши свой вопрос:"
     )
-    keyboard = ReplyKeyboardMarkup(buttons, resize_keyboard=True, one_time_keyboard=True)
+    keyboard = ReplyKeyboardMarkup(buttons_main, resize_keyboard=True, one_time_keyboard=True)
     await update.message.reply_text(help_text, reply_markup=keyboard)
 
 
@@ -69,7 +68,6 @@ async def handle_message(update: Update, context: CallbackContext) -> None:
 async def handle_callback_query(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     await query.answer()
-    print(f'{query.data=}')
     if query.data != 'another_question':
         buttons = query.message.reply_markup.inline_keyboard
         result = get_title_by_payload(buttons, query.data)
@@ -79,9 +77,6 @@ async def handle_callback_query(update: Update, context: CallbackContext) -> Non
         response_text = f"Что вы хотите узнать?"
         keyboard = ReplyKeyboardMarkup(buttons_main, resize_keyboard=True, one_time_keyboard=True)
         await query.message.reply_text(response_text, reply_markup=keyboard)
-
-
-
 
 
 if __name__ == '__main__':
