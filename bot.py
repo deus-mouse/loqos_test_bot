@@ -4,7 +4,7 @@ from typing import Tuple, Union, List, Optional
 from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, CallbackContext, MessageHandler, filters, CallbackQueryHandler
 import aiohttp
-from instances import phrazes, buttons, buttons_taxation, buttons_setup_company
+from instances import phrazes, buttons_main, buttons_taxation, buttons_setup_company
 from random import randint
 from itertools import zip_longest
 from helpers import get_keyboard_from_json, get_random_object, get_inline_keyboard_from_json, find_values_by_titles, get_title_by_payload
@@ -18,7 +18,7 @@ logging.basicConfig(
 )
 
 
-async def get_rasa_response(message: str) -> Tuple[Union[list, List[str]], Optional[list]]:
+async def get_rasa_response(message: str) -> list:
     rasa_url = "http://localhost:5005/webhooks/rest/webhook"
     payload = {
         "sender": "telegram_user",
@@ -69,10 +69,18 @@ async def handle_message(update: Update, context: CallbackContext) -> None:
 async def handle_callback_query(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     await query.answer()
-    buttons = query.message.reply_markup.inline_keyboard
-    result = get_title_by_payload(buttons, query.data)
-    response_text = f"Вы выбрали тему: {result}"
-    await query.message.reply_text(response_text)
+    print(f'{query.data=}')
+    if query.data != 'another_question':
+        buttons = query.message.reply_markup.inline_keyboard
+        result = get_title_by_payload(buttons, query.data)
+        response_text = f"Вы выбрали тему: {result}"
+        await query.message.reply_text(response_text)
+    else:
+        response_text = f"Что вы хотите узнать?"
+        keyboard = ReplyKeyboardMarkup(buttons_main, resize_keyboard=True, one_time_keyboard=True)
+        await query.message.reply_text(response_text, reply_markup=keyboard)
+
+
 
 
 

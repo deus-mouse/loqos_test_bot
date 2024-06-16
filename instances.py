@@ -7,7 +7,7 @@ phrazes = {'start':
                            'Выбери одну из кнопок или задай свой вопрос.'],
            }
 
-buttons = [
+buttons_main = [
     [KeyboardButton("Документы")],
     [KeyboardButton("Создайте свою компанию")],
     [KeyboardButton("Налогообложение")]
