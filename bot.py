@@ -1,15 +1,13 @@
 import logging
-from typing import Tuple, Union, List, Optional
-
 from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, CallbackContext, MessageHandler, filters, CallbackQueryHandler
+from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, CallbackContext, MessageHandler, filters, \
+    CallbackQueryHandler
 import aiohttp
 from instances import phrazes, buttons_main, buttons_taxation, buttons_setup_company
-from random import randint
 from itertools import zip_longest
-from helpers import get_keyboard_from_json, get_random_object, get_inline_keyboard_from_json, find_values_by_titles, get_title_by_payload
+from helpers import get_keyboard_from_json, get_random_object, get_inline_keyboard_from_json, find_values_by_titles, \
+    get_title_by_payload
 import config
-
 
 
 logging.basicConfig(
