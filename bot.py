@@ -8,9 +8,8 @@ from instances import phrazes, buttons, buttons_taxation, buttons_setup_company
 from random import randint
 from itertools import zip_longest
 from helpers import get_keyboard_from_json, get_random_object, get_inline_keyboard_from_json, find_values_by_titles, get_title_by_payload
+import config
 
-
-TELEGRAM_TOKEN = '7317734081:AAE64GtnGTvz54ZbI60qRQO0xGdmc37tKl8'
 
 
 logging.basicConfig(
@@ -78,7 +77,7 @@ async def handle_callback_query(update: Update, context: CallbackContext) -> Non
 
 
 if __name__ == '__main__':
-    application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
+    application = ApplicationBuilder().token(config.TELEGRAM_TOKEN).build()
 
     start_handler = CommandHandler('start', start)
     help_handler = CommandHandler('help', help_command)
