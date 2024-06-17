@@ -3,7 +3,7 @@ from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKe
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, CallbackContext, MessageHandler, filters, \
     CallbackQueryHandler
 import aiohttp
-from instances import phrazes, buttons_main, buttons_taxation, buttons_setup_company
+from instances import phrazes, buttons_main
 from itertools import zip_longest
 from helpers import get_keyboard_from_json, get_random_object, get_inline_keyboard_from_json, find_values_by_titles, \
     get_title_by_payload
@@ -39,7 +39,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                    reply_markup=keyboard)
 
 
-async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def help_command(update: Update):
     help_text = (
         "Я могу предоставить тебе полезную информацию для жизни на Кипре! ☀️ "
         "Выбери один из разделов, чтобы начать или напиши свой вопрос:"
@@ -48,7 +48,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(help_text, reply_markup=keyboard)
 
 
-async def handle_message(update: Update, context: CallbackContext) -> None:
+async def handle_message(update: Update) -> None:
     user_message = update.message.text
     rasa_responses = await get_rasa_response(user_message)
     for response, buttons in rasa_responses:
@@ -63,7 +63,7 @@ async def handle_message(update: Update, context: CallbackContext) -> None:
         await update.message.reply_text(response, reply_markup=keyboard)
 
 
-async def handle_callback_query(update: Update, context: CallbackContext) -> None:
+async def handle_callback_query(update: Update) -> None:
     query = update.callback_query
     await query.answer()
     if query.data != 'another_question':
