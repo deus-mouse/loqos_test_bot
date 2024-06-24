@@ -22,7 +22,6 @@ nlu:
     - что ты умеешь
     - что можешь
 #    - what can you do
-#    - help
 
 - intent: documents
   examples: |
