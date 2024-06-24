@@ -30,7 +30,6 @@ responses:
     - text: "Я могу предоставить тебе полезную информацию для жизни на Кипре! ☀️ 
   Выбери один из разделов, чтобы начать или напиши свой вопрос:"
   #  - text: "I can provide you with useful information for life in Cyprus! ☀️
-  #  Choose one of the sections to get started or write your own question:"
 
   utter_default:
     - text: "К сожалению, не получилось распознать твой запрос. Попробуй сформулировать по-другому"
