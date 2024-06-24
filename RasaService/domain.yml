@@ -17,7 +17,6 @@ responses:
     - text: "Пожалуйста! 🍀"
     - text: "Обращайтесь! 🍀"
   #  - text: "You are welcome! 🍀"
-  #  - text: "Get in touch! 🍀"
 
   utter_thanks_from_docs:
     - text: "Хочешь узнать что-нибудь еще?"
