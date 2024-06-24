@@ -24,7 +24,6 @@ class ActionHandleGreet(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
         dispatcher.utter_message(response="utter_greet")
-        # dispatcher.utter_message(text=get_random_object(phrazes.get('start_tails')), buttons=buttons)
         dispatcher.utter_message(response="utter_suggesting_buttons", buttons=buttons_main_json)
         return []
 
