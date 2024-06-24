@@ -11,7 +11,6 @@ responses:
   utter_greet:
     - text: "Привет 👋"
     - text: "Здравствуй 👋"
-  #  - text: "Hello 👋"
 
   utter_thanks:
     - text: "Пожалуйста! 🍀"
