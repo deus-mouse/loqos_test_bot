@@ -129,12 +129,6 @@ class ActionHandleSetupCompany(Action):
         return "action_handle_setup_company"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
-        # buttons = [
-        #     {"title": "Типы компаний", },
-        #     {"title": "Зарегистрировать компанию", },
-        #     {"title": "Обязательства и платежи", },
-        #     {"title": "Другой вопрос", },
-        # ]
         dispatcher.utter_message(response="utter_setup_company", buttons=buttons_setup_company)
         return [SlotSet("conversation_block", "setup_company")]
 
