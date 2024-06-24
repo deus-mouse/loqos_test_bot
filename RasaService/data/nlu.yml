@@ -7,10 +7,6 @@ nlu:
     - здравствуй
     - здравствуйте
     - доброе утро
-#    - hello
-#    - hi
-#    - hey
-#    - good morning
 
 - intent: thanks
   examples: |
