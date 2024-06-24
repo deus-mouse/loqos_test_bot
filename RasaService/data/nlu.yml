@@ -18,7 +18,6 @@ nlu:
     - нет вопросов
 #    - thanks
 #    - thx
-#    - no questions
 
 - intent: help
   examples: |
