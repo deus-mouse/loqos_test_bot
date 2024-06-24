@@ -13,6 +13,7 @@ from rasa_sdk.types import DomainDict
 from rasa_sdk.executor import CollectingDispatcher
 import sys
 import os
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from instances import buttons_main_json, buttons_docs_json, buttons_taxation, buttons_setup_company
 from rasa_sdk.events import SlotSet
@@ -79,9 +80,9 @@ class ActionHandleVisasForEntry(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
         buttons_docs2_json = [
-    {"title": "Назад", "payload": "/go_back"},
-    {"title": "Спасибо", "payload": "/thanks"},
-]
+            {"title": "Назад", "payload": "/go_back"},
+            {"title": "Спасибо", "payload": "/thanks"},
+        ]
         dispatcher.utter_message(response="utter_visas_for_entry", buttons=buttons_docs2_json)
         return [SlotSet("conversation_block", "documents")]
 
@@ -92,9 +93,9 @@ class ActionHandlePoliceClearanceCertificate(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
         buttons_docs2_json = [
-    {"title": "Назад", "payload": "/go_back"},
-    {"title": "Спасибо", "payload": "/thanks"},
-]
+            {"title": "Назад", "payload": "/go_back"},
+            {"title": "Спасибо", "payload": "/thanks"},
+        ]
         dispatcher.utter_message(response="utter_police_clearance_certificate", buttons=buttons_docs2_json)
         return [SlotSet("conversation_block", "documents")]
 
@@ -105,9 +106,9 @@ class ActionHandleTranslationOfDocuments(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
         buttons_docs2_json = [
-    {"title": "Назад", "payload": "/go_back"},
-    {"title": "Спасибо", "payload": "/thanks"},
-]
+            {"title": "Назад", "payload": "/go_back"},
+            {"title": "Спасибо", "payload": "/thanks"},
+        ]
         dispatcher.utter_message(response="utter_translation_of_documents", buttons=buttons_docs2_json)
         return [SlotSet("conversation_block", "documents")]
 
@@ -117,7 +118,6 @@ class ActionHandleAnotherQuestion(Action):
         return "action_handle_another_question"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
-
         dispatcher.utter_message(response="utter_another_question")
         dispatcher.utter_message(response="utter_suggesting_buttons", buttons=buttons_main_json)
 
@@ -129,7 +129,6 @@ class ActionHandleSetupCompany(Action):
         return "action_handle_setup_company"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
-
         # buttons = [
         #     {"title": "Типы компаний", },
         #     {"title": "Зарегистрировать компанию", },
@@ -145,14 +144,5 @@ class ActionHandleTaxation(Action):
         return "action_handle_taxation"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
-
         dispatcher.utter_message(response="utter_taxation", buttons=buttons_taxation)
         return []
-
-
-
-
-
-
-
-
