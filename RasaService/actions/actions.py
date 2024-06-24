@@ -15,7 +15,6 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from instances import phrazes, buttons_main_json, buttons_docs_json, buttons_taxation, buttons_setup_company
-from helpers import get_random_object
 from rasa_sdk.events import SlotSet
 
 
